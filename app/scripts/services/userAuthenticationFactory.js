@@ -39,12 +39,38 @@ angular.module('selfStatsApp').factory("UserAuthentication", function($http, $q,
     return deferred.promise;
   }
 
+  function logout() {
+    var deferred = $q.defer();
+
+    // $http({
+    //   method: "POST",
+    //   url: logoutUrl,
+    //   headers: {
+    //     "access_token": userInfo.accessToken
+    //   }
+    // }).then(function(result) {
+    //   $window.sessionStorage["userInfo"] = null;
+    //   userInfo = null;
+    //   deferred.resolve(result);
+    // }, function(error) {
+    //   deferred.reject(error);
+    // });
+
+    // --------- temp --------
+      $window.sessionStorage["userInfo"] = null;
+      userInfo = null;
+      deferred.resolve('result');
+    // --------- end temp --------
+    return deferred.promise;
+  }
+
   function getUserInfo() {
     return userInfo;
   }
 
   return {
     login: login,
-    getUserInfo: getUserInfo
+    getUserInfo: getUserInfo,
+    logout: logout
   };
 });
