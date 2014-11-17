@@ -19,6 +19,10 @@ body {
   opacity: 0.95;
 }
 
+.invalidInput {
+  border: 1px solid red;
+}
+
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
