@@ -14,27 +14,14 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="selfStatsApp">
+  <body ng-app="selfStatsApp" ng-controller="BaseController">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container">
-      <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a ui-sref="home">Home</a></li>
-          <li><a ui-sref="about">About</a></li>
-        </ul>
-        <h3 class="text-muted">selfStats</h3>
-      </div>
 
-      <div ui-view></div>
-
-      <div class="footer">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
-      </div>
-    </div>
+    <div ui-view ng-animate="'view'"></div>
 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -81,6 +68,7 @@
     <script src="bower_components/restangular/dist/restangular.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-ui-router.stateHelper/statehelper.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -88,6 +76,11 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/about.js"></script>
+        <script src="scripts/controllers/loginController.js"></script>
+        <script src="scripts/controllers/baseController.js"></script>
+
+        <script src="scripts/services/userAuthenticationFactory.js"></script>
+        <script src="scripts/services/resolverService.js"></script>
         <!-- endbuild -->
 </body>
 </html>
