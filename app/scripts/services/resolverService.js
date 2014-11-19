@@ -1,20 +1,15 @@
 'use strict';
 
-angular.module('selfStatsApp').factory("ResolverService", function($q, authenticationSvc) {
+angular.module('selfStatsApp').factory("ResolverService", function($q, UserAuthentication) {
     return function() {
-        return {
-            auth: function() {
-                var userInfo = authenticationSvc.getUserInfo();
+        var userInfo = UserAuthentication.getUserInfo();
 
-                if (userInfo) {
-                    return $q.when(userInfo);
-                } else {
-                    console.log("no auth");
-                    return $q.reject({
-                        authenticated: false
-                    });
-                }
-            }
+        if (userInfo) {
+            return $q.when(userInfo);
+        } else {
+            return $q.reject({
+                authenticated: false
+            });
         }
     }
 });

@@ -1,7 +1,14 @@
 {
   "name": "selfstats",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "body-parser": "^1.9.2",
+    "cors": "^2.5.2",
+    "express": "^4.10.2",
+    "hat": "0.0.3",
+    "mongodb": "^1.4.20",
+    "mongoose": "^3.8.19"
+  },
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-autoprefixer": "^0.7.3",

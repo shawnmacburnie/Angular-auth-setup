@@ -35,17 +35,9 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         resolve: {
-          auth: ["$q", "UserAuthentication",
-            function($q, UserAuthentication) {
-              var userInfo = UserAuthentication.getUserInfo();
-
-              if (userInfo) {
-                return $q.when(userInfo);
-              } else {
-                return $q.reject({
-                  authenticated: false
-                });
-              }
+          auth: ["ResolverService",
+            function(ResolverService) {
+              return ResolverService();
             }
           ]
         }
@@ -56,17 +48,9 @@ angular
         controller: 'AboutCtrl',
         parent: 'home',
         resolve: {
-          auth: ["$q", "UserAuthentication",
-            function($q, UserAuthentication) {
-              var userInfo = UserAuthentication.getUserInfo();
-
-              if (userInfo) {
-                return $q.when(userInfo);
-              } else {
-                return $q.reject({
-                  authenticated: false
-                });
-              }
+          auth: ["ResolverService",
+            function(ResolverService) {
+              return ResolverService();
             }
           ]
         }
