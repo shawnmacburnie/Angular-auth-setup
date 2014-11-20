@@ -11,13 +11,13 @@ angular.module('selfStatsApp')
             $state.go("home");
         }
         $scope.login = function() {
-            // if (fieldsValid()) {
-            //     UserAuthentication.login($scope.loginForm.username, $scope.loginForm.password).then(function(data) {
-            //         //console.log(data);
-            //         $state.go("home");
-            //     });
-            // }
-            console.log(SHA256.hash($scope.loginForm.username));
+            if (fieldsValid()) {
+                UserAuthentication.login($scope.loginForm.username, $scope.loginForm.password).then(function(data) {
+                    //console.log(data);
+                    $state.go("home");
+                });
+            }
+            //console.log(SHA256.hash($scope.loginForm.username));
         };
         $('.loginContainer').on('keyup', function(e) {
             if (e.which == 13 || event.keyCode == 13) {

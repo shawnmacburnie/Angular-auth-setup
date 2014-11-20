@@ -8,6 +8,5 @@ angular.module('selfStatsApp').factory("SHA256", function($q, $http) {
             //jalert(h);
             return h.toString(CryptoJS.enc.Hex);
         }
-
     };
 });

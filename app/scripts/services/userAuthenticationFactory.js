@@ -1,28 +1,37 @@
-angular.module('selfStatsApp').factory("UserAuthentication", function($http, $q, $window) {
+angular.module('selfStatsApp').factory("UserAuthentication", function($http, $q, $window,$state) {
   var userInfo;
 
   function init() {
-    if ($window.sessionStorage["userInfo"]) {
-      userInfo = JSON.parse($window.sessionStorage["userInfo"]);
+    var info = JSON.parse($window.sessionStorage["userInfo"]);
+    if (info) {
+      $http.defaults.headers.post.Authorization = info.accessToken;
+      $http.post("http://localhost:3000/authenticate").then(function(result){
+        userInfo = {
+          accessToken: result.data.accessToken,
+          user: result.data.user
+        }
+        console.log(userInfo);
+        $http.defaults.headers.post.Authorization = result.data.accessToken;
+        $window.sessionStorage["userInfo"] = JSON.stringify(userInfo);
+        $state.go("home");
+      });
     }
   }
 
-  init();
-
-  function login(userName, password) {
+  function login(username, password) {
     var deferred = $q.defer();
 
 
     $http.post("http://localhost:3000/login", {
-      username: userName,
+      username: username,
       password: password
     }).then(function(result) {
       if (result.data.ERROR) {
         deferred.reject(result.ERROR);
       } else {
         userInfo = {
-          accessToken: result.data.access_token,
-          userName: result.data.userName
+          accessToken: result.data.accessToken,
+          username: result.data.username
         };
         $window.sessionStorage["userInfo"] = JSON.stringify(userInfo);
         deferred.resolve(userInfo);
@@ -36,33 +45,29 @@ angular.module('selfStatsApp').factory("UserAuthentication", function($http, $q,
   function logout() {
     var deferred = $q.defer();
 
-    // $http({
-    //   method: "POST",
-    //   url: logoutUrl,
-    //   headers: {
-    //     "access_token": userInfo.accessToken
-    //   }
-    // }).then(function(result) {
-    //   $window.sessionStorage["userInfo"] = null;
-    //   userInfo = null;
-    //   deferred.resolve(result);
-    // }, function(error) {
-    //   deferred.reject(error);
-    // });
-
-    // --------- temp --------
-    $window.sessionStorage["userInfo"] = null;
-    userInfo = null;
-    deferred.resolve('result');
-    // --------- end temp --------
+    $http({
+      method: "POST",
+      url: "http://localhost:3000/logout"
+    }).then(function(result) {
+      $window.sessionStorage["userInfo"] = null;
+      userInfo = {};
+      deferred.resolve(result);
+    }, function(error) {
+      deferred.reject(error);
+    });
     return deferred.promise;
   }
 
   function getUserInfo() {
-    return userInfo;
+    return userInfo ? userInfo.user : userInfo;
+  }
+
+  function getHeaders() {
+    return userInfo ? userInfo.accessToken : userInfo;
   }
 
   return {
+    init: init,
     login: login,
     getUserInfo: getUserInfo,
     logout: logout
