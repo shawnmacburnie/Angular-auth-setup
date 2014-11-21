@@ -2,13 +2,28 @@
 also better view of whats going on here http://daneden.github.io/animate.css/http://daneden.github.io/animate.css/
 
 
-how to run
+- how to run
+```
+$ npm install && bower install
+```
 
-- running app: "grunt serve"
+- if you dont already have this you will need to run
+```
+$ npm install -g grunt-cli
+```
 
-- running the server "node server/"
+- To run website 
+```
+$ grunt serve
+```
 
-- running making sure mongo database is running "sudo mongod"
+- to run server
+```
+- node server/
+```
 
-- open mongo database console "mongo"
+- This will need a mongo database running.
+```
+sudo mongod
+```
 
