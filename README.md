@@ -1,4 +1,6 @@
-# hello
+# Angular app with user authentication all ready to go.
+
+This repo is for starting an angular project that has user authentications ready to go right out of the box. Great for hackathons where you need user authentication and you want a blank project ready to go with user auth.
 
 
 - how to run
