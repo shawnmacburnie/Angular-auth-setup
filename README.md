@@ -1,5 +1,4 @@
- docs for animation https://github.com/daneden/animate.css
-also better view of whats going on here http://daneden.github.io/animate.css/http://daneden.github.io/animate.css/
+### hello
 
 
 - how to run
@@ -19,11 +18,11 @@ $ grunt serve
 
 - to run server
 ```
-- node server/
+$ node server/
 ```
 
 - This will need a mongo database running.
 ```
-sudo mongod
+$ sudo mongod
 ```
 
