@@ -2,19 +2,22 @@ angular.module('selfStatsApp').factory("UserAuthentication", function($http, $q,
   var userInfo;
 
   function init() {
-    var info = JSON.parse($window.sessionStorage["userInfo"]);
-    if (info) {
-      $http.defaults.headers.post.Authorization = info.accessToken;
-      $http.post("http://localhost:3000/authenticate").then(function(result){
-        userInfo = {
-          accessToken: result.data.accessToken,
-          user: result.data.user
-        }
-        console.log(userInfo);
-        $http.defaults.headers.post.Authorization = result.data.accessToken;
-        $window.sessionStorage["userInfo"] = JSON.stringify(userInfo);
-        $state.go("home");
-      });
+    var sesStorage = $window.sessionStorage["userInfo"];
+    if(sesStorage) {
+      var info = JSON.parse(sesStorage);
+      if (info) {
+        $http.defaults.headers.post.Authorization = info.accessToken;
+        $http.post("http://localhost:3000/authenticate").then(function(result){
+          userInfo = {
+            accessToken: result.data.accessToken,
+            user: result.data.user
+          }
+          console.log(userInfo);
+          $http.defaults.headers.post.Authorization = result.data.accessToken;
+          $window.sessionStorage["userInfo"] = JSON.stringify(userInfo);
+          $state.go("home");
+        });
+      }
     }
   }
 
